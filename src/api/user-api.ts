@@ -19,9 +19,17 @@ export const userApi = {
     });
   },
 
-  loginUser: ({ login, password }: { login: string; password: string }) => {
-    return axios.get<UserDto[]>(
-      `${BASE_URL}/users/?login=${login}&password=${password}`
+  loginUser: async ({
+    login,
+    password,
+  }: {
+    login: string;
+    password: string;
+  }) => {
+    const res = await axios.get<UserDto[]>(
+      `${BASE_URL}/users?login=${login}&password=${password}`
     );
+
+    return res.data[0];
   },
 };

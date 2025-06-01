@@ -1,8 +1,12 @@
-import { useAppDispath } from '../../shared/redux';
-import { loginThunk } from './login-thunk';
+import { useAppDispath, useAppSelector } from '../../shared/redux';
+import { AuthSlice } from './auth.slice';
+import { loginThunk, useLoginLoading } from './login-thunk';
 
 export const Login = () => {
+  const isLoading = useLoginLoading();
   const dispatch = useAppDispath();
+  const loginError = useAppSelector(AuthSlice.selectors.getLoginErorr);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -10,6 +14,7 @@ export const Login = () => {
     const password = data.get('password')?.toString();
     if (login && password) {
       dispatch(loginThunk(login, password));
+      event.currentTarget.reset();
       return;
     }
     alert('Введите логин и пароль');
@@ -40,6 +45,13 @@ export const Login = () => {
       <button className="bg-black text-white py-2 px-8 rounded-md mb-4 cursor-pointer hover:bg-sky-600">
         Войти
       </button>
+      {isLoading && (
+        <span className="text-orange-500 font-bold">...Loading</span>
+      )}
+
+      {loginError && (
+        <span className="text-orange-500 font-bold">{loginError}</span>
+      )}
     </form>
   );
 };

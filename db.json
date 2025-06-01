@@ -3,16 +3,10 @@
     {
       "id": "1",
       "login": "Байрам",
-      "password": 12345
+      "password": "12345"
     }
   ],
   "tasks": [
-    {
-      "id": "9U3jEsTPGgOfl0PiSAdyQ",
-      "completed": false,
-      "title": "1312",
-      "description": ""
-    },
     {
       "id": "b7imGk6QI9qfAsdWZKED4",
       "completed": false,

@@ -3,12 +3,13 @@ import { rootReducer } from '../../shared/redux';
 
 type AuthState = {
   userId: string | undefined;
+  loginErorr: string | undefined;
 };
 
 export const AuthSlice = createSlice({
   name: 'auth',
   initialState: {
-    userId: undefined,
+    userId: localStorage.getItem('userId'),
   } as AuthState,
   reducers: {
     addUserId(state, action: PayloadAction<{ id: string }>) {
@@ -17,9 +18,13 @@ export const AuthSlice = createSlice({
     removeUserId(state) {
       state.userId = undefined;
     },
+    setLoginError(state, action: PayloadAction<string>) {
+      state.loginErorr = action.payload;
+    },
   },
 
   selectors: {
     getUserId: (state) => state.userId,
+    getLoginErorr: (state) => state.loginErorr,
   },
 }).injectInto(rootReducer);
