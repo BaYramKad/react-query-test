@@ -1,9 +1,19 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app';
+import { queryClient } from '../shared/ui/query-client';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { store } from '../shared/redux';
+import { Provider } from 'react-redux';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <StrictMode>
+        <App />
+      </StrictMode>
+    </Provider>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
 );

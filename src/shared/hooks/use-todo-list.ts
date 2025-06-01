@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { todoListApi } from './api';
+import { todoListApi } from '../../api/todo-list-api';
 
 export const useTodoList = () => {
   //   const [enabled, setEnabled] = useState(false);
@@ -17,7 +17,7 @@ export const useTodoList = () => {
     ...todoListApi.getTodoListQueryOptions(), // Получаем опции для бесконечного запроса.
     // enabled: enabled, // Это свойство указывает, что запрос будет выполнен только в том случае, если оно истинно. Для ленивых запросов.
     // Функция для преобразования данных перед их использованием. Она будет вызвана, когда данные будут получены.
-    select: (data) => data.toReversed(),
+    select: (data) => [...data].toReversed(),
   });
 
   return {

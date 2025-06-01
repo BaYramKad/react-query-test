@@ -1,14 +1,9 @@
 import { queryOptions } from '@tanstack/react-query';
+import type { TaskDto } from '../shared/types/todo-types';
+
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000';
-
-export type TaskDto = {
-  id: string;
-  title: string;
-  completed: boolean;
-  description: string;
-};
 
 export const todoListApi = {
   baseKey: 'tasks',
@@ -21,13 +16,11 @@ export const todoListApi = {
     return axios.post<TaskDto>(`${BASE_URL}/tasks`, newTask);
   },
 
-  updateTodo: (task: TaskDto) => {
-    return axios.patch<TaskDto>(`${BASE_URL}/tasks/${task.id}`, {
-      ...task,
-    });
+  toggleTodo: (task: Partial<TaskDto> & { id: string }) => {
+    return axios.patch<TaskDto>(`${BASE_URL}/tasks/${task.id}`, task);
   },
 
-  deleteTodo: (taskId: number) => {
+  deleteTodo: (taskId: string) => {
     return axios.delete(`${BASE_URL}/tasks/${taskId}`);
   },
 
