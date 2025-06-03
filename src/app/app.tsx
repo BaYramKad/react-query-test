@@ -1,4 +1,5 @@
 import { Login } from '../modules/auth/login';
+import { Header } from '../modules/header';
 import { TodoList } from '../modules/todo-list/todo-list';
 import { useUser } from '../shared/hooks/use-user';
 
@@ -10,7 +11,16 @@ export const App = () => {
   }
 
   if (user.data) {
-    return <TodoList />;
+    return (
+      <div className="bg-blue-200 h-screen flex items-center flex-col">
+        <Header />
+        <TodoList />
+      </div>
+    );
   }
-  return <Login />;
+  return (
+    <div className="h-screen flex items-center bg-blue-200">
+      <Login />
+    </div>
+  );
 };

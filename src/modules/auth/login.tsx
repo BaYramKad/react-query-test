@@ -23,26 +23,28 @@ export const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col w-[800px] mx-auto container mt-10 items-center border-2 border-gray-700 rounded-md"
+      className="flex flex-col justify-center gap-3 text-white w-[500px] h-[300px] mx-auto container items-center bg-stone-700 rounded-2xl"
     >
-      <h1 className="mt-2 mb-4 font-bold text-2xl">Log in</h1>
+      <h1 className="mt-2 mb-4 font-black text-2xl">Log in</h1>
       <label className="flex flex-col gap-2 mb-4">
         <input
           placeholder="login"
-          className=" border-2 border-gray-700 rounded-md p-2 w-[400px]"
+          className="border-b-amber-50 border-x-0 border-t-0 outline-0 text-white border-2 p-2 w-[400px]"
           type="text"
           name="login"
           id="login"
         />
         <input
           placeholder="password"
-          className=" border-2 border-gray-700 rounded-md p-2 w-[400px]"
+          className="appearance-none border-b-amber-50 border-x-0 border-t-0 outline-0 text-white border-2 p-2 w-[400px]"
           type="number"
           name="password"
           id="password"
         />
       </label>
-      <button className="bg-black text-white py-2 px-8 rounded-md mb-4 cursor-pointer hover:bg-sky-600">
+      <button
+        className={`bg-blue-100 hover:bg-blue-200 transition text-black font-bold py-2 px-8 rounded-md mb-2 cursor-pointer`}
+      >
         Войти
       </button>
       {isLoading && (
