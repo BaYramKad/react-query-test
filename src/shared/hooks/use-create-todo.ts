@@ -12,6 +12,7 @@ export const useCreateTodo = () => {
     const text = String(new FormData(event.currentTarget).get('text'));
     if (!text.length) {
       alert('Please Enter the text');
+      return;
     }
 
     createDispatch(createTodoThunk(text));

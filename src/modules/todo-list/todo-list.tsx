@@ -8,17 +8,9 @@ import { ToggleTodo } from '../../shared/ui/toggle-icon';
 import { useToggleTodo } from '../../shared/hooks/use-toggle-todo';
 
 export const TodoList: FC = () => {
-  const { todoItems, error, isLoading } = useTodoList();
+  const { todoItems } = useTodoList();
   const { deleteTodo, getIsPending } = useDeleteTodo();
   const { toggleTodo } = useToggleTodo();
-
-  if (isLoading) {
-    return <div className="font-black text-2xl">Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
   return (
     <div className="text-white mx-auto w-1/3 mt-10 mb-10 bg-gray-900 p-6 rounded-lg shadow-lg">
