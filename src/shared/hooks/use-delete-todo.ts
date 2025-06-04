@@ -1,16 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { todoListApi } from '../../api/todo-list-api';
+import { useSuspenseUser } from './use-user';
 
 export const useDeleteTodo = () => {
   const queryClient = useQueryClient();
+  const user = useSuspenseUser();
 
   const deleteTodoMutation = useMutation({
     mutationFn: todoListApi.deleteTodo,
     onSettled: async () => {
-      queryClient.invalidateQueries(todoListApi.getTodoListQueryOptions()); // Перезапрашивает данные по определенному ключю в stale и перезапрашивает те которые сейчас активные и на которые есть ссылки
+      queryClient.invalidateQueries(
+        todoListApi.getTodoListQueryOptions(user.data.id)
+      ); // Перезапрашивает данные по определенному ключю в stale и перезапрашивает те которые сейчас активные и на которые есть ссылки
     },
     onSuccess: (_, deletedId) => {
-      const key = todoListApi.getTodoListQueryOptions().queryKey;
+      const key = todoListApi.getTodoListQueryOptions(user.data.id).queryKey;
       const todos = queryClient.getQueryData(key);
       // Pissimistic update
       if (todos) {

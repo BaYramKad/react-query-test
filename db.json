@@ -4,7 +4,25 @@
       "id": "1",
       "login": "Байрам",
       "password": "12345"
+    },
+    {
+      "id": "2",
+      "login": "Алиса",
+      "password": "123"
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "08o4NmEdlx6p6Ks-AMpGl",
+      "completed": false,
+      "title": "Это Байрама задачи Owner- Байрам",
+      "userId": "1"
+    },
+    {
+      "id": "Sp3rA9L5eJvyfVlJ2JzqH",
+      "completed": false,
+      "title": "Это Алисы задачи Owner- Алиса",
+      "userId": "2"
+    }
+  ]
 }

@@ -7,11 +7,6 @@ const BASE_URL = 'http://localhost:3000';
 
 export const todoListApi = {
   baseKey: 'tasks',
-  getTodoList: async () => {
-    const result = await axios.get<TaskDto[]>(`${BASE_URL}/tasks`);
-    return result.data;
-  },
-
   createTodo: (newTask: TaskDto) => {
     return axios.post<TaskDto>(`${BASE_URL}/tasks`, newTask);
   },
@@ -24,10 +19,15 @@ export const todoListApi = {
     return axios.delete(`${BASE_URL}/tasks/${taskId}`);
   },
 
-  getTodoListQueryOptions: () => {
+  getTodoListQueryOptions: (userId: string) => {
     return queryOptions({
-      queryKey: [todoListApi.baseKey, 'list'], // Ключ запроса, который будет использоваться для кэширования и синхронизации данных.
-      queryFn: todoListApi.getTodoList,
+      queryKey: [todoListApi.baseKey, 'list', userId], // Ключ запроса, который будет использоваться для кэширования и синхронизации данных.
+      queryFn: async () => {
+        const result = await axios.get<TaskDto[]>(
+          `${BASE_URL}/tasks?userId=${userId}`
+        );
+        return result.data;
+      },
     });
   },
 };

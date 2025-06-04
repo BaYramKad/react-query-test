@@ -25,7 +25,8 @@ export const createTodoThunk =
       queryKey: [todoListApi.baseKey],
     });
 
-    const queryKeyOptions = todoListApi.getTodoListQueryOptions().queryKey;
+    const queryKeyOptions =
+      todoListApi.getTodoListQueryOptions(userId).queryKey;
 
     queryClient.setQueryData(queryKeyOptions, (todos) => [
       ...(todos ?? []),
